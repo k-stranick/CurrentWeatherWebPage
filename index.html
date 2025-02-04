@@ -19,9 +19,11 @@
         <h1>Current Weather</h1>
         <p>Weather details will be displayed here.</p>
         <input type="text" id="cityInput" placeholder="Enter your city name">
-        <button onClick="initMap()">Get Weather</button>
+        <button onClick="">Get Weather</button>
         <div id="weatherResults"></div>
     </div>
+
+    <div id="map" style="height: 400px; width: 100%;"></div>
     <script src="js/weatherApi.js">
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrFQ3FFECKqxi7XAFTHnujwGp1CwPgU6M&callback=initMap" async
