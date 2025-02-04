@@ -7,7 +7,7 @@ const API_KEY = 'hVoTEBLzRGVyrM3Z3z7iDALSJLqcZLU4';
 const DATA_FIELD = 'precipitationIntensity';
 
 // set the ISO timestamp (now for all fields, up to 6 hour out for precipitationIntensity)
-// const TIMESTAMP = (new Date()).toISOString(); 
+const TIMESTAMP = (new Date()).toISOString(); 
 
 // initialize the map
 function initMap() {
