@@ -1,0 +1,8 @@
+
+
+https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+https://www.tomorrow.io/a/faq/weather-api/how-can-i-access-weather-data-for-my-area-using-the-us-weather-api/
+https://docs.tomorrow.io/reference/post-timelines
+https://docs.tomorrow.io/reference/weather-forecast?_gl=1*tvzhgu*_gcl_au*NTEzNDMwNDkzLjE3Mzg0Mjc3NTc.
+https://docs.tomorrow.io/reference/realtime-weather?_gl=1*tvzhgu*_gcl_au*NTEzNDMwNDkzLjE3Mzg0Mjc3NTc.
+https://medium.com/@francesco.saviano87/creating-a-stunning-weather-app-with-javascript-a-step-by-step-guide-4c0cac3fa780
