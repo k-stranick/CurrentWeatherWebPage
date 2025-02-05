@@ -1,6 +1,18 @@
 // this listens for  an event on the searchButton ID and calls the display weather function if valid
+// document.querySelector("#searchBar").onkeypress = function (e) {
+//     if (e.key === "Enter") {
+//         displayWeather();
+//     }
+// };
+
+document.querySelector("#searchBar").addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+        document.querySelector("#searchButton").click(); // Simulate button click
+    }
+});
+
 document.querySelector("#searchButton").addEventListener("click", async function () {
-    const locationInput = document.querySelector("#cityInput").value.trim();
+    const locationInput = document.querySelector("#searchBar").value.trim();
 
     if (!locationInput) {
         alert("Please enter City or Zip Code To get Weather update");
@@ -18,7 +30,7 @@ document.querySelector("#searchButton").addEventListener("click", async function
 //function to fetch the weather data from the API
 async function getWeather(location) {
     const tomorrowIoApiKey = "hVoTEBLzRGVyrM3Z3z7iDALSJLqcZLU4";
-    const tomorrowIoUrl = `https://api.tomorrow.io/v4/weather/realtime?location=${encodeURIComponent(location)}}&units=imperial&apikey=${tomorrowIoApiKey}`;
+    const tomorrowIoUrl = `https://api.tomorrow.io/v4/weather/realtime?location=${encodeURIComponent(location)}&units=imperial&apikey=${tomorrowIoApiKey}`;
 
     try {
         // send request to the weather API
@@ -55,7 +67,7 @@ function displayWeather(data) {
 
     // Populate the container with desired info
     weatherContainer.innerHTML = `
-    <h3>Weather Information</h3>
+    <h1>Current Weather</h1>
     <p><strong>Location:</strong> ${locationName}</p>
     <p><strong>Time:</strong>  ${currentTime}</p>
     <p><strong>Temperature:</strong> ${temperature} °F</p>
@@ -70,7 +82,7 @@ function fetchWeatherDataCurrent(location) {
         headers: { accept: 'application/json', 'accept-encoding': 'deflate, gzip, br' }
     }
 
-    const tomorrowIo = (`https://api.tomorrow.io/v4/weather/realtime?location=${location}`, options)
+    const tomorrowIo = (`https://api.tomorrow.io/v4/weather/realtime?location=${encodeURIComponent(location)}`, options)
     fetch(tomorrowIo)
         .then(res => res.json()) // parse the JSON response
         .then(tomorrowIOWeatherData => {
