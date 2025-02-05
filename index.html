@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
+<!--
+https://docs.tomorrow.io/reference/weather-forecast?_gl=1*tvzhgu*_gcl_au*NTEzNDMwNDkzLjE3Mzg0Mjc3NTc.
+https://docs.tomorrow.io/reference/realtime-weather?_gl=1*tvzhgu*_gcl_au*NTEzNDMwNDkzLjE3Mzg0Mjc3NTc.
+https://medium.com/@francesco.saviano87/creating-a-stunning-weather-app-with-javascript-a-step-by-step-guide-4c0cac3fa780-->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,13 +23,30 @@
 <body>
     <div class="container">
         <h1>Current Weather</h1>
-        <p>Weather details will be displayed here.</p>
+        <!--Search box need to be bale to search by zip code also-->
         <input type="text" id="cityInput" placeholder="Enter your city name">
-        <input type="text" id="stateInput" placeholder="Enter your state name"> <!-- should be zip code-->
-        <button onclick="getWeather()">Get Weather</button>
-        <div id="weatherResults"></div>
+        <button id="searchButton">Get Weather</button>
     </div>
-    <script src="js/weatherApi.js"></script>
+
+    <!--to display the information make it added dyncamically with components-->
+    <div class="weather-info">
+        <h2 id="city-name"></h2>
+        <p id="weather-description"></p>
+        <p id="temperature"></p>
+        <p id="humidity"></p>
+        <!-- add more possibly? -->
+    </div>
+
+    <!--tomorrow.io map-->
+    <div id="map" style="height: 400px; width: 100%;"></div>
+   
+   <!--scripts-->
+   <script src="js/getWeather.js">
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrFQ3FFECKqxi7XAFTHnujwGp1CwPgU6M&callback=initMap" 
+        type="text/javascript"
+        loading="lazy"
+        ></script>
 </body>
 
 </html>
