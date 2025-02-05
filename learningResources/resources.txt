@@ -7,3 +7,5 @@ https://docs.tomorrow.io/reference/weather-forecast?_gl=1*tvzhgu*_gcl_au*NTEzNDM
 https://docs.tomorrow.io/reference/realtime-weather?_gl=1*tvzhgu*_gcl_au*NTEzNDMwNDkzLjE3Mzg0Mjc3NTc.
 https://medium.com/@francesco.saviano87/creating-a-stunning-weather-app-with-javascript-a-step-by-step-guide-4c0cac3fa780
 https://stackoverflow.com/questions/52882144/replacement-for-deprecated-keypress-dom-event
+https://www.w3.org/TR/uievents/#event-type-keypress
+https://stackoverflow.com/questions/44512388/understanding-async-await-on-nodejs

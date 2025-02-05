@@ -76,23 +76,6 @@ function displayWeather(data) {
   `;
 }
 
-function fetchWeatherDataCurrent(location) {
-    const options = {
-        method: 'GET',
-        headers: { accept: 'application/json', 'accept-encoding': 'deflate, gzip, br' }
-    }
-
-    const tomorrowIo = (`https://api.tomorrow.io/v4/weather/realtime?location=${encodeURIComponent(location)}`, options)
-    fetch(tomorrowIo)
-        .then(res => res.json()) // parse the JSON response
-        .then(tomorrowIOWeatherData => {
-            //Extract the weather details from the JSON response
-            const temperature = tomorrowIOWeatherData.data.temperature;
-            const name = tomorrowIOWeatherData.data.location.name;
 
 
-        })
-
-        .catch(err => console.error(err));
-}
 
