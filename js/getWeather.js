@@ -1,12 +1,16 @@
 // API Key and URL (Define Globally)
 const tomorrowIoApiKey = "hVoTEBLzRGVyrM3Z3z7iDALSJLqcZLU4";
 const tomorrowIoRealTimeWeatherUrl = "https://api.tomorrow.io/v4/weather/realtime";
+
 // Search Input Event Listener
 document.querySelector("#searchBar").addEventListener("keydown", function (e) {
     if (e.key === "Enter") fetchAndDisplayWeather();
 });
+
 // Search Button Event Listener
 document.querySelector("#searchButton").addEventListener("click", fetchAndDisplayWeather);
+
+
 /**
  * Fetches and displays weather information based on user input.
  * 
@@ -33,6 +37,8 @@ async function fetchAndDisplayWeather() {
         showErrorMessage(error.message);
     }
 }
+
+
 /**
  * Fetches weather data from the Tomorrow.io API for a given location.
  * 
@@ -60,6 +66,8 @@ async function fetchCurrentWeatherData(location) {
         return null;
     }
 }
+
+
 /**
  * Displays weather information in the UI.
  * 
@@ -86,6 +94,8 @@ function displayWeather(data) {
     <p><strong>Pressure:</strong> ${pressure} hPa</p>
   `;
 }
+
+
 /**
  * Displays an error message in the UI.
  * 
