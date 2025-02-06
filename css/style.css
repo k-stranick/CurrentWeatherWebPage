@@ -6,6 +6,15 @@
   padding: 20px;
   text-align: center;
 }
+
+button {
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #f19f07 !important;
+}
+
 /* 
 body {
   font-family: "Roboto", sans-serif;
