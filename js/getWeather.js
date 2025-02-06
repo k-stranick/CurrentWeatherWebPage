@@ -1,8 +1,9 @@
 //remember ctrl + shift + l to select all the same words
 
 // API Key and URL (Define Globally)
-const tomorrowIoApiKey = "hVoTEBLzRGVyrM3Z3z7iDALSJLqcZLU4";
-const tomorrowIoRealTimeWeatherUrl = "https://api.tomorrow.io/v4/weather/realtime";
+const TOMORROW_IO_API_KEY = "hVoTEBLzRGVyrM3Z3z7iDALSJLqcZLU4";
+const TOMORROW_IO_REALTIME_URL = "https://api.tomorrow.io/v4/weather/realtime";
+
 const searchBar = document.querySelector("#searchBar");
 const searchButton = document.querySelector("#searchButton");
 const weatherInfo = document.querySelector(".weather-info");
@@ -12,18 +13,18 @@ const searchContainer = document.querySelector("#searchContainer");
 // Search Input Event Listener
 searchBar.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
-        handleSearchBar();
+        handleSearch();
     }
 
 });
 
 // Search Button Event Listener
 searchButton.addEventListener("click", (e) => {
-    handleSearchBar();
+    handleSearch();
 });
 
 
-async function handleSearchBar() {
+async function handleSearch() {
     await fetchAndDisplayWeather();
     searchBar.focus();
 }
@@ -72,27 +73,27 @@ async function fetchAndDisplayWeather() {
  * @returns {Promise<Object|null>} - The weather data object if the request is successful, or null if it fails.
  */
 async function fetchCurrentWeatherData(location) {
-    const tomorrowIoUrl = `${tomorrowIoRealTimeWeatherUrl}?location=${encodeURIComponent(location)}&units=imperial&apikey=${tomorrowIoApiKey}`;
-    try {
+    const tomorrowIoUrl = `${TOMORROW_IO_REALTIME_URL}?location=${encodeURIComponent(location)}&units=imperial&apikey=${TOMORROW_IO_API_KEY}`;
+    // try {
 
-        const response = await fetch(tomorrowIoUrl);
+    const response = await fetch(tomorrowIoUrl);
 
-        if (!response.ok) {
-            throw new Error(`Request has failed with status ${response.status}`);
-        }
-
-        const weatherData = await response.json();
-        console.log("Raw API response:", weatherData); // Debugging will print the JSON response in the console
-
-        return weatherData;
-
-    } catch (error) {
-        weatherInfo.style.display = "block";
-        weatherInfo.innerHTML = `<p style="color:red;">Error: ${error.message}</p>`;
-        console.error(error);
-
-        return null;
+    if (!response.ok) {
+        throw new Error(`Request has failed with status ${response.status}`);
     }
+
+    const weatherData = await response.json();
+    console.log("Raw API response:", weatherData); // Debugging will print the JSON response in the console
+
+    return weatherData;
+
+    // } catch (error) {
+    //     weatherInfo.style.display = "block";
+    //     weatherInfo.innerHTML = `<p style="color:red;">Error: ${error.message}</p>`;
+    //     console.error(error);
+
+    //     return null;
+    // }
 }
 
 
@@ -180,8 +181,6 @@ function createCard() {
  * This function removes the existing .weather-info Bootstrap v5.3.3 card element.
  */
 function removeOldElement() {
-    const oldWeatherInfo = document.querySelector(".weather-info");
-    if (oldWeatherInfo) {
-        oldWeatherInfo.remove();
-    }
+    const oldWeatherCards = document.querySelectorAll(".weather-info");
+    oldWeatherCards.forEach((card) => card.remove());
 }

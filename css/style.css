@@ -37,17 +37,16 @@ body {
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
   to {
     opacity: 1;
   }
 }
+
 #searchContainer {
   background-color: hsla(0, 14%, 93%, 0.808) !important;
 }
+
 .fade-in {
   opacity: 0; /* Ensure the element is initially hidden */
-  animation: fadeIn 2s forwards; /* Apply the fadeIn animation */
+  animation: fadeIn 1.5s forwards; /* Apply the fadeIn animation */
 }
