@@ -36,17 +36,6 @@ body {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.7) !important;
 }
 
-@media (max-width: 600px) {
-  .container {
-    width: 90%;
-  }
-}
-@media (min-width: 601px) {
-  .container {
-    width: 50%;
-  }
-}
-
 @keyframes fadeIn {
   from {
     opacity: 0;
