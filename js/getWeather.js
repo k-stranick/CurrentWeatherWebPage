@@ -1,16 +1,32 @@
+//remember ctrl + shift + l to select all the same words
+
 // API Key and URL (Define Globally)
 const tomorrowIoApiKey = "hVoTEBLzRGVyrM3Z3z7iDALSJLqcZLU4";
 const tomorrowIoRealTimeWeatherUrl = "https://api.tomorrow.io/v4/weather/realtime";
+const searchBar = document.querySelector("#searchBar");
+const searchButton = document.querySelector("#searchButton");
+const weatherInfo = document.querySelector(".weather-info");
+const searchContainer = document.querySelector("#searchContainer");
+
 
 // Search Input Event Listener
-document.querySelector("#searchBar").addEventListener("keydown", function (e) {
-    if (e.key === "Enter") fetchAndDisplayWeather();
+searchBar.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+        handleSearchBar();
+    }
 
 });
 
 // Search Button Event Listener
-document.querySelector("#searchButton").addEventListener("click", fetchAndDisplayWeather);
+searchButton.addEventListener("click", (e) => {
+    handleSearchBar();
+});
 
+
+async function handleSearchBar() {
+    await fetchAndDisplayWeather();
+    searchBar.focus();
+}
 
 /**
  * Fetches and displays weather information based on user input.
@@ -23,16 +39,20 @@ document.querySelector("#searchButton").addEventListener("click", fetchAndDispla
  * @returns {Promise<void>}
  */
 async function fetchAndDisplayWeather() {
-    const locationInput = document.querySelector("#searchBar").value.trim();
+    const locationInput = searchBar.value.trim();
     if (!locationInput) {
         alert("Please enter City or Zip Code to get Weather update!");
         return;
     }
+
     try {
         const weatherData = await fetchCurrentWeatherData(locationInput);
+
         if (weatherData) {
             displayWeather(weatherData);
+            searchBar.value = "";
         }
+
     } catch (error) {
         const errorMessage = `Error displaying weather data: ${error.message}\nStack Trace: ${error.stack}`;
         console.error(errorMessage);
@@ -54,20 +74,27 @@ async function fetchAndDisplayWeather() {
 async function fetchCurrentWeatherData(location) {
     const tomorrowIoUrl = `${tomorrowIoRealTimeWeatherUrl}?location=${encodeURIComponent(location)}&units=imperial&apikey=${tomorrowIoApiKey}`;
     try {
+
         const response = await fetch(tomorrowIoUrl);
+
         if (!response.ok) {
             throw new Error(`Request has failed with status ${response.status}`);
         }
+
         const weatherData = await response.json();
         console.log("Raw API response:", weatherData); // Debugging will print the JSON response in the console
+
         return weatherData;
+
     } catch (error) {
-        document.querySelector(".weather-info").style.display = "block";
-        document.querySelector(".weather-info").innerHTML = `<p style="color:red;">Error: ${error.message}</p>`;
+        weatherInfo.style.display = "block";
+        weatherInfo.innerHTML = `<p style="color:red;">Error: ${error.message}</p>`;
         console.error(error);
+
         return null;
     }
 }
+
 
 
 /**
@@ -79,7 +106,7 @@ async function fetchCurrentWeatherData(location) {
  * @param {Object} data - The weather data object containing weather information.
  */
 function displayWeather(data) {
-    const container = document.querySelector("#searchContainer");
+    const container = searchContainer;
 
     // Remove old weather-info if it exists
     removeOldElement();
@@ -117,13 +144,6 @@ function displayWeather(data) {
  * 
  * @param {string} message - The error message to display.
  */
-// function showErrorMessage(message) {
-//     const weatherContainer = document.querySelector(".weather-info");
-//     weatherContainer.style.display = "block";
-//     weatherContainer.innerHTML = `<p style="color:red;">Error: ${message}</p>`;
-//     console.error(message);
-// }
-
 function showErrorMessage(message) {
     // Remove old weather-info if it exists
     removeOldElement();
@@ -137,7 +157,7 @@ function showErrorMessage(message) {
     `;
 
     // Append to main container
-    const container = document.querySelector("#searchContainer");
+    const container = searchContainer;
     container.appendChild(errorCard);
 
     console.error(message);
