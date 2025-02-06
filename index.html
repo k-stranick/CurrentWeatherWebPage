@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
-<!--
--->
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,7 +17,7 @@
 
 </head>
 
-<body>
+<body class="background-img">
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
@@ -30,17 +26,25 @@
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="d-block">
-                    <!--Search box need to be bale to search by zip code also-->
-                    <input type="text" id="searchBar" placeholder="Enter your city name">
-                    <button id="searchButton" class="btn-warning">Get Weather</button>
-                </div>
 
             </div>
         </nav>
     </header>
 
-    <main class="container d-flex flex-column align-items-center"></main>
+    <main id="searchContainer"
+        class="mw-100 d-flex flex-column align-items-center justify-content-center min-vh-100 fade-in">
+        <!-- Semi-transparent bar spanning the page width -->
+        <div id="searchMainContainer"
+            class="w-75 p-4 d-flex flex-column align-items-center rounded-pill shadow-lg custom-box-shadow p-3 mb-5 bg-body rounded">
+            <h1 class="text-dark mb-4">Check the Weather</h1>
+            <div class="d-flex flex-row justify-content-center w-50">
+                <input type="text" id="searchBar" class="form-control me-2" placeholder="Enter your city name" />
+                <button id="searchButton" class="btn btn-warning w-25" type="button">
+                    Get Weather
+                </button>
+            </div>
+        </div>
+    </main>
 
     <!--scripts-->
     <script src="js/getWeather.js"></script>

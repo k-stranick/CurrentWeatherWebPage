@@ -1,3 +1,41 @@
+.card {
+  background-color: #f0ebeb;
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.4);
+  margin: 10px;
+  padding: 20px;
+  text-align: center;
+}
+/* 
+body {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+} */
+
+.background-img {
+  /* Multiple backgrounds: gradient + image */
+  background: linear-gradient(rgba(255, 254, 254, 0.5), rgba(6, 149, 231, 0.4)),
+    url("../assets/bgImg.jpg") center / cover no-repeat;
+
+  /* Make the background fixed on scroll */
+  background-attachment: fixed;
+
+  /* Ensure the background covers at least the full viewport height */
+  min-height: 100vh;
+}
+
+/* Semi-transparent bar that spans the full width */
+.translucent-bar {
+  background-color: rgba(0, 0, 0, 0.5); /* 50% black overlay */
+  border-radius: 0.5rem;
+}
+
+.custom-box-shadow {
+  /* Increase the opacity or adjust the spread to your liking */
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.7) !important;
+}
+
 @media (max-width: 600px) {
   .container {
     width: 90%;
@@ -7,4 +45,20 @@
   .container {
     width: 50%;
   }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+#searchMainContainer {
+  background-color: hsla(0, 14%, 93%, 0.781) !important;
+}
+.fade-in {
+  opacity: 0; /* Ensure the element is initially hidden */
+  animation: fadeIn 2s forwards; /* Apply the fadeIn animation */
 }

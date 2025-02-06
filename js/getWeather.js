@@ -79,14 +79,13 @@ async function fetchCurrentWeatherData(location) {
  * @param {Object} data - The weather data object containing weather information.
  */
 function displayWeather(data) {
-    const container = document.querySelector("main.container.d-flex.flex-column.align-items-center");
+    const container = document.querySelector("#searchContainer");
 
     // Remove old weather-info if it exists
     removeOldElement();
 
-    const weatherCard = document.createElement("div");
-    weatherCard.classList.add("card", "weather-info");
-    weatherCard.style.display = "block";
+    // Create a new weather-info card
+    const weatherCard = createCard();
 
     //extracting data from the API response
     const values = data?.data?.values || {};
@@ -95,9 +94,6 @@ function displayWeather(data) {
     const temperature = values.temperature ?? "N/A";
     const humidity = values.humidity ?? "N/A";
     const pressure = values.pressureSurfaceLevel ?? "N/A";
-
-    // const weatherContainer = document.querySelector(".weather-info");
-    // weatherContainer.style.display = "block";
 
     //updating the HTML content of the weather container
     weatherCard.innerHTML = `
@@ -132,10 +128,8 @@ function showErrorMessage(message) {
     // Remove old weather-info if it exists
     removeOldElement();
 
-    // Create a brand-new .weather-info card
-    const errorCard = document.createElement("div");
-    errorCard.classList.add("card", "weather-info");
-    errorCard.style.display = "block";
+    // Create a new error card
+    const errorCard = createCard();
 
     // Insert your error message
     errorCard.innerHTML = `
@@ -143,12 +137,28 @@ function showErrorMessage(message) {
     `;
 
     // Append to main container
-    const container = document.querySelector("main.container.d-flex.flex-column.align-items-center");
+    const container = document.querySelector("#searchContainer");
     container.appendChild(errorCard);
 
     console.error(message);
 }
 
+/**
+ * This function creates a new .weather-info Bootstrap v5.3.3 card element.
+ * @returns {HTMLDivElement} - A new .weather-info card element.
+ */
+function createCard() {
+    // Create a brand-new .weather-info card
+    const Card = document.createElement("div");
+    Card.classList.add("card", "weather-info");
+    Card.style.display = "block";
+
+    return Card;
+}
+
+/**
+ * This function removes the existing .weather-info Bootstrap v5.3.3 card element.
+ */
 function removeOldElement() {
     const oldWeatherInfo = document.querySelector(".weather-info");
     if (oldWeatherInfo) {
