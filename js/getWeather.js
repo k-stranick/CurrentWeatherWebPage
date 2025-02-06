@@ -10,7 +10,7 @@ const weatherInfo = document.querySelector(".weather-info");
 const searchContainer = document.querySelector("#searchContainer");
 
 
-// Search Input Event Listener
+// Search Input Text Field Event Listener
 searchBar.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
         handleSearch();
@@ -18,12 +18,15 @@ searchBar.addEventListener("keydown", (e) => {
 
 });
 
-// Search Button Event Listener
+// Search Submit Button Event Listener
 searchButton.addEventListener("click", (e) => {
     handleSearch();
 });
 
-
+/**
+ * Handles the search functionality by fetching and displaying weather information.
+ * Will reset the search bar focus after the search is complete.
+ */
 async function handleSearch() {
     await fetchAndDisplayWeather();
     searchBar.focus();
@@ -60,7 +63,6 @@ async function fetchAndDisplayWeather() {
     }
 }
 
-
 /**
  * Fetches weather data from the Tomorrow.io API for a given location.
  * 
@@ -93,8 +95,6 @@ async function fetchCurrentWeatherData(location) {
     }
 }
 
-
-
 /**
  * Displays weather information in the UI.
  * 
@@ -121,10 +121,17 @@ function displayWeather(data) {
     container.appendChild(weatherCard);
 }
 
-function convertUnixTimeToDateTime(unixTime) {
-    return new Date(unixTime * 1000).toLocaleString();
-}
+// pulled from online I will need to test this function
+// function convertUnixTimeToDateTime(unixTime) {
+//     return new Date(unixTime * 1000).toLocaleString();
+// }
 
+/**
+ * Extracts weather details from the API response.
+ * 
+ * @param {Object} data - The weather data object containing weather information.
+ * @returns {Object} - An object containing extracted weather details.
+ */
 function extractWeatherDetails(data) {
     const values = data?.data?.values || {};
 
@@ -137,6 +144,12 @@ function extractWeatherDetails(data) {
     };
 }
 
+/**
+ * Generates HTML content for displaying weather information.
+ * 
+ * @param {Object} weatherDetails - An object containing weather details.
+ * @returns {string} - The HTML content for displaying weather information.
+ */
 function generateWeatherHTML(location, currentTime, temperature, humidity, pressure) {
     return `
       <h1 class="weather-title">Current Weather</h1>
@@ -149,8 +162,6 @@ function generateWeatherHTML(location, currentTime, temperature, humidity, press
       </div>
     `;
 }
-
-
 
 /**
  * Displays an error message in the UI.
