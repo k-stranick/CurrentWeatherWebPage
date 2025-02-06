@@ -5,6 +5,7 @@ const tomorrowIoRealTimeWeatherUrl = "https://api.tomorrow.io/v4/weather/realtim
 // Search Input Event Listener
 document.querySelector("#searchBar").addEventListener("keydown", function (e) {
     if (e.key === "Enter") fetchAndDisplayWeather();
+
 });
 
 // Search Button Event Listener
@@ -29,12 +30,13 @@ async function fetchAndDisplayWeather() {
     }
     try {
         const weatherData = await fetchCurrentWeatherData(locationInput);
-        console.log("Raw API response:", weatherData); // Debugging
         if (weatherData) {
             displayWeather(weatherData);
         }
     } catch (error) {
-        showErrorMessage(error.message);
+        const errorMessage = `Error displaying weather data: ${error.message}\nStack Trace: ${error.stack}`;
+        console.error(errorMessage);
+        showErrorMessage(errorMessage);
     }
 }
 
@@ -57,7 +59,7 @@ async function fetchCurrentWeatherData(location) {
             throw new Error(`Request has failed with status ${response.status}`);
         }
         const weatherData = await response.json();
-        console.log("Raw API response:", weatherData); // Debugging
+        console.log("Raw API response:", weatherData); // Debugging will print the JSON response in the console
         return weatherData;
     } catch (error) {
         document.querySelector(".weather-info").style.display = "block";
@@ -77,15 +79,28 @@ async function fetchCurrentWeatherData(location) {
  * @param {Object} data - The weather data object containing weather information.
  */
 function displayWeather(data) {
-    const weatherContainer = document.querySelector(".weather-info");
-    weatherContainer.style.display = "block";
+    const container = document.querySelector("main.container.d-flex.flex-column.align-items-center");
+
+    // Remove old weather-info if it exists
+    removeOldElement();
+
+    const weatherCard = document.createElement("div");
+    weatherCard.classList.add("card", "weather-info");
+    weatherCard.style.display = "block";
+
+    //extracting data from the API response
     const values = data?.data?.values || {};
     const locationName = data?.location?.name ?? "N/A";
     const currentTime = data?.data?.time ?? "N/A"; // need to make current time 
     const temperature = values.temperature ?? "N/A";
     const humidity = values.humidity ?? "N/A";
     const pressure = values.pressureSurfaceLevel ?? "N/A";
-    weatherContainer.innerHTML = `
+
+    // const weatherContainer = document.querySelector(".weather-info");
+    // weatherContainer.style.display = "block";
+
+    //updating the HTML content of the weather container
+    weatherCard.innerHTML = `
     <h1>Current Weather</h1>
     <p><strong>Location:</strong> ${locationName}</p>
     <p><strong>Time:</strong>  ${currentTime}</p>
@@ -93,6 +108,8 @@ function displayWeather(data) {
     <p><strong>Humidity:</strong> ${humidity}%</p>
     <p><strong>Pressure:</strong> ${pressure} hPa</p>
   `;
+
+    container.appendChild(weatherCard);
 }
 
 
@@ -104,9 +121,37 @@ function displayWeather(data) {
  * 
  * @param {string} message - The error message to display.
  */
+// function showErrorMessage(message) {
+//     const weatherContainer = document.querySelector(".weather-info");
+//     weatherContainer.style.display = "block";
+//     weatherContainer.innerHTML = `<p style="color:red;">Error: ${message}</p>`;
+//     console.error(message);
+// }
+
 function showErrorMessage(message) {
-    const weatherContainer = document.querySelector(".weather-info");
-    weatherContainer.style.display = "block";
-    weatherContainer.innerHTML = `<p style="color:red;">Error: ${message}</p>`;
+    // Remove old weather-info if it exists
+    removeOldElement();
+
+    // Create a brand-new .weather-info card
+    const errorCard = document.createElement("div");
+    errorCard.classList.add("card", "weather-info");
+    errorCard.style.display = "block";
+
+    // Insert your error message
+    errorCard.innerHTML = `
+      <p style="color:red;">Error: ${message}</p>
+    `;
+
+    // Append to main container
+    const container = document.querySelector("main.container.d-flex.flex-column.align-items-center");
+    container.appendChild(errorCard);
+
     console.error(message);
+}
+
+function removeOldElement() {
+    const oldWeatherInfo = document.querySelector(".weather-info");
+    if (oldWeatherInfo) {
+        oldWeatherInfo.remove();
+    }
 }
