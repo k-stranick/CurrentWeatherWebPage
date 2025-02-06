@@ -9,3 +9,14 @@ https://medium.com/@francesco.saviano87/creating-a-stunning-weather-app-with-jav
 https://stackoverflow.com/questions/52882144/replacement-for-deprecated-keypress-dom-event
 https://www.w3.org/TR/uievents/#event-type-keypress
 https://stackoverflow.com/questions/44512388/understanding-async-await-on-nodejs
+https://stackoverflow.com/questions/59652055/set-focus-on-text-input-using-button-and-javascript
+https://stackoverflow.com/questions/17500704/how-can-i-set-focus-on-an-element-in-an-html-form-using-javascript
+
+https://jsoneditoronline.org/indepth/parse/json-date-format/
+
+//Bootstrap
+https://getbootstrap.com/docs/5.0/utilities/sizing/
+https://getbootstrap.com/docs/5.0/utilities/shadows/
+https://getbootstrap.com/docs/5.1/utilities/opacity/
+https://getbootstrap.com/docs/4.0/utilities/borders/
+https://getbootstrap.com/docs/4.0/utilities/flex/
