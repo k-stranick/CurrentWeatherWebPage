@@ -12,6 +12,8 @@ https://stackoverflow.com/questions/44512388/understanding-async-await-on-nodejs
 https://stackoverflow.com/questions/59652055/set-focus-on-text-input-using-button-and-javascript
 https://stackoverflow.com/questions/17500704/how-can-i-set-focus-on-an-element-in-an-html-form-using-javascript
 
+https://jsoneditoronline.org/indepth/parse/json-date-format/
+
 //Bootstrap
 https://getbootstrap.com/docs/5.0/utilities/sizing/
 https://getbootstrap.com/docs/5.0/utilities/shadows/

@@ -55,9 +55,8 @@ async function fetchAndDisplayWeather() {
         }
 
     } catch (error) {
-        const errorMessage = `Error displaying weather data: ${error.message}\nStack Trace: ${error.stack}`;
-        console.error(errorMessage);
-        showErrorMessage(errorMessage);
+        console.error(`Error displaying weather data: ${error.message}\nStack Trace: ${error.stack}`);
+        showErrorMessage("An error occurred while fetching the weather data. Please try again later.");
     }
 }
 
@@ -74,26 +73,24 @@ async function fetchAndDisplayWeather() {
  */
 async function fetchCurrentWeatherData(location) {
     const tomorrowIoUrl = `${TOMORROW_IO_REALTIME_URL}?location=${encodeURIComponent(location)}&units=imperial&apikey=${TOMORROW_IO_API_KEY}`;
-    // try {
+    try {
 
-    const response = await fetch(tomorrowIoUrl);
+        const response = await fetch(tomorrowIoUrl);
 
-    if (!response.ok) {
-        throw new Error(`Request has failed with status ${response.status}`);
+        if (!response.ok) {
+            throw new Error(`Request has failed with status ${response.status}`);
+        }
+
+        const weatherData = await response.json();
+        console.log("Raw API response:", weatherData); // Debugging will print the JSON response in the console
+
+        return weatherData;
+
+    } catch (error) {
+        console.error(`Error fetching weather data: ${error.message}\nStack Trace: ${error.stack}`);
+        showErrorMessage("An error occurred while fetching the weather data. Please try again later.");
+        return null;
     }
-
-    const weatherData = await response.json();
-    console.log("Raw API response:", weatherData); // Debugging will print the JSON response in the console
-
-    return weatherData;
-
-    // } catch (error) {
-    //     weatherInfo.style.display = "block";
-    //     weatherInfo.innerHTML = `<p style="color:red;">Error: ${error.message}</p>`;
-    //     console.error(error);
-
-    //     return null;
-    // }
 }
 
 
@@ -116,25 +113,43 @@ function displayWeather(data) {
     const weatherCard = createCard();
 
     //extracting data from the API response
-    const values = data?.data?.values || {};
-    const locationName = data?.location?.name ?? "N/A";
-    const currentTime = data?.data?.time ?? "N/A"; // need to make current time 
-    const temperature = values.temperature ?? "N/A";
-    const humidity = values.humidity ?? "N/A";
-    const pressure = values.pressureSurfaceLevel ?? "N/A";
+    const weatherDetails = extractWeatherDetails(data);
 
     //updating the HTML content of the weather container
-    weatherCard.innerHTML = `
-    <h1>Current Weather</h1>
-    <p><strong>Location:</strong> ${locationName}</p>
-    <p><strong>Time:</strong>  ${currentTime}</p>
-    <p><strong>Temperature:</strong> ${temperature} °F</p>
-    <p><strong>Humidity:</strong> ${humidity}%</p>
-    <p><strong>Pressure:</strong> ${pressure} hPa</p>
-  `;
+    weatherCard.innerHTML = generateWeatherHTML(weatherDetails);
 
     container.appendChild(weatherCard);
 }
+
+function convertUnixTimeToDateTime(unixTime) {
+    return new Date(unixTime * 1000).toLocaleString();
+}
+
+function extractWeatherDetails(data) {
+    const values = data?.data?.values || {};
+
+    return {
+        locationName: data?.location?.name ?? "N/A",
+        currentTime: data?.data?.time ?? "N/A", // need to make current time 
+        temperature: values.temperature ?? "N/A",
+        humidity: values.humidity ?? "N/A",
+        pressure: values.pressureSurfaceLevel ?? "N/A"
+    };
+}
+
+function generateWeatherHTML(location, currentTime, temperature, humidity, pressure) {
+    return `
+      <h1 class="weather-title">Current Weather</h1>
+      <div class="weather-details">
+        <p><strong>Location:</strong> ${location}</p>
+        <p><strong>Time:</strong> ${currentTime}</p>
+        <p><strong>Temperature:</strong> <span class="temp">${temperature} °F</span></p>
+        <p><strong>Humidity:</strong> <span class="humidity">${humidity}%</span></p>
+        <p><strong>Pressure:</strong> <span class="pressure">${pressure} hPa</span></p>
+      </div>
+    `;
+}
+
 
 
 /**
