@@ -44,8 +44,8 @@ body {
     opacity: 1;
   }
 }
-#searchMainContainer {
-  background-color: hsla(0, 14%, 93%, 0.781) !important;
+#searchContainer {
+  background-color: hsla(0, 14%, 93%, 0.808) !important;
 }
 .fade-in {
   opacity: 0; /* Ensure the element is initially hidden */
