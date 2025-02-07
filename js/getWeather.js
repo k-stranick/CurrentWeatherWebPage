@@ -3,6 +3,7 @@
 // API Key and URL (Define Globally) 
 const WORKER_URL = "https://long-bush-acb2.kyle-stranickschool.workers.dev/";
 
+
 const searchBar = document.querySelector("#searchBar");
 const searchButton = document.querySelector("#searchButton");
 const weatherInfo = document.querySelector(".weather-info");
