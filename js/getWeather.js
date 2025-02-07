@@ -1,8 +1,7 @@
 //remember ctrl + shift + l to select all the same words
 
-// API Key and URL (Define Globally)
-const TOMORROW_IO_API_KEY = "hVoTEBLzRGVyrM3Z3z7iDALSJLqcZLU4";
-const TOMORROW_IO_REALTIME_URL = "https://api.tomorrow.io/v4/weather/realtime";
+// API Key and URL (Define Globally) 
+const WORKER_URL = "https://long-bush-acb2.kyle-stranickschool.workers.dev/";
 
 const searchBar = document.querySelector("#searchBar");
 const searchButton = document.querySelector("#searchButton");
@@ -25,7 +24,7 @@ searchButton.addEventListener("click", (e) => {
 
 /**
  * Handles the search functionality by fetching and displaying weather information.
- * Will reset the search bar focus after the search is complete.
+ * This will reset the search bar focus after the search is complete.
  */
 async function handleSearch() {
     await fetchAndDisplayWeather();
@@ -45,7 +44,7 @@ async function handleSearch() {
 async function fetchAndDisplayWeather() {
     const locationInput = searchBar.value.trim();
     if (!locationInput) {
-        alert("Please enter City or Zip Code to get Weather update!");
+        alert("Please enter City or Zip Code to get Local Weather!");
         return;
     }
 
@@ -53,6 +52,8 @@ async function fetchAndDisplayWeather() {
         const weatherData = await fetchCurrentWeatherData(locationInput);
 
         if (weatherData) {
+            console.log("Weather Data:", weatherData); // Debugging
+
             displayWeather(weatherData);
             searchBar.value = "";
         }
@@ -74,10 +75,10 @@ async function fetchAndDisplayWeather() {
  * @returns {Promise<Object|null>} - The weather data object if the request is successful, or null if it fails.
  */
 async function fetchCurrentWeatherData(location) {
-    const tomorrowIoUrl = `${TOMORROW_IO_REALTIME_URL}?location=${encodeURIComponent(location)}&units=imperial&apikey=${TOMORROW_IO_API_KEY}`;
+    const workerUrl = `${WORKER_URL}?location=${encodeURIComponent(location)}`;
     try {
 
-        const response = await fetch(tomorrowIoUrl);
+        const response = await fetch(workerUrl);
 
         if (!response.ok) {
             throw new Error(`Request has failed with status ${response.status}`);
@@ -114,17 +115,14 @@ function displayWeather(data) {
 
     //extracting data from the API response
     const weatherDetails = extractWeatherDetails(data);
+    console.log("Extracted Weather Details:", weatherDetails); // Debugging
 
     //updating the HTML content of the weather container
     weatherCard.innerHTML = generateWeatherHTML(weatherDetails);
+    console.log("Generated HTML:", weatherCard.innerHTML); // Debugging
 
     container.appendChild(weatherCard);
 }
-
-// pulled from online I will need to test this function
-// function convertUnixTimeToDateTime(unixTime) {
-//     return new Date(unixTime * 1000).toLocaleString();
-// }
 
 /**
  * Extracts weather details from the API response.
@@ -137,7 +135,7 @@ function extractWeatherDetails(data) {
 
     return {
         locationName: data?.location?.name ?? "N/A",
-        currentTime: data?.data?.time ?? "N/A", // need to make current time 
+        currentTime: new Date(data?.data?.time).toLocaleString() ?? "N/A",
         temperature: values.temperature ?? "N/A",
         humidity: values.humidity ?? "N/A",
         pressure: values.pressureSurfaceLevel ?? "N/A"
@@ -145,21 +143,63 @@ function extractWeatherDetails(data) {
 }
 
 /**
- * Generates HTML content for displaying weather information.
- * 
- * @param {Object} weatherDetails - An object containing weather details.
- * @returns {string} - The HTML content for displaying weather information.
+ * Converts Unix time to a human-readable date and time.
+ * @param {number} unixTime 
+ * @returns {string} - The human-readable date and time.
  */
-function generateWeatherHTML(location, currentTime, temperature, humidity, pressure) {
+function convertUnixTimeToDateTime(unixTime) {
+    return new Date(unixTime * 1000).toLocaleString();
+}
+
+// /**
+//  * Generates HTML content for displaying weather information.
+//  * 
+//  * @param {Object} weatherDetails - An object containing weather details.
+//  * @returns {string} - The HTML content for displaying weather information.
+//  */
+function generateWeatherHTML(weatherDetails) {
+    const { locationName, currentTime, temperature, humidity, pressure } = weatherDetails;
+
     return `
-      <h1 class="weather-title">Current Weather</h1>
-      <div class="weather-details">
-        <p><strong>Location:</strong> ${location}</p>
-        <p><strong>Time:</strong> ${currentTime}</p>
-        <p><strong>Temperature:</strong> <span class="temp">${temperature} °F</span></p>
-        <p><strong>Humidity:</strong> <span class="humidity">${humidity}%</span></p>
-        <p><strong>Pressure:</strong> <span class="pressure">${pressure} hPa</span></p>
-      </div>
+    <div class="fade-in">
+        <h1 class="weather-title text-dark">Current Weather</h1>
+        
+        <div class="text-center">
+            <h2 class="location">
+                <i class="bi bi-geo-alt-fill text-danger"></i> ${locationName}
+            </h2>
+            
+            <p class="time text-muted">
+                <i class="bi bi-clock text-primary"></i> ${currentTime}
+            </p>
+
+            <div class="row mt-3">
+                <div class="col-4">
+                    <div class="stat-box">
+                        <i class="bi bi-thermometer-half text-warning"></i>
+                        <p class="fw-bold">${temperature}°F</p>
+                        <span class="text-muted">Temperature</span>
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div class="stat-box">
+                        <i class="bi bi-moisture text-info"></i>
+                        <p class="fw-bold">${humidity}%</p>
+                        <span class="text-muted">Humidity</span>
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div class="stat-box">
+                        <i class="bi bi-speedometer2 text-success"></i>
+                        <p class="fw-bold">${pressure} hPa</p>
+                        <span class="text-muted">Pressure</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     `;
 }
 

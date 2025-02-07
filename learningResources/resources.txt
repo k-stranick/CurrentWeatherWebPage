@@ -1,22 +1,30 @@
-
-
-https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
-https://www.tomorrow.io/a/faq/weather-api/how-can-i-access-weather-data-for-my-area-using-the-us-weather-api/
-https://docs.tomorrow.io/reference/post-timelines
-https://docs.tomorrow.io/reference/weather-forecast?_gl=1*tvzhgu*_gcl_au*NTEzNDMwNDkzLjE3Mzg0Mjc3NTc.
-https://docs.tomorrow.io/reference/realtime-weather?_gl=1*tvzhgu*_gcl_au*NTEzNDMwNDkzLjE3Mzg0Mjc3NTc.
-https://medium.com/@francesco.saviano87/creating-a-stunning-weather-app-with-javascript-a-step-by-step-guide-4c0cac3fa780
-https://stackoverflow.com/questions/52882144/replacement-for-deprecated-keypress-dom-event
-https://www.w3.org/TR/uievents/#event-type-keypress
-https://stackoverflow.com/questions/44512388/understanding-async-await-on-nodejs
-https://stackoverflow.com/questions/59652055/set-focus-on-text-input-using-button-and-javascript
-https://stackoverflow.com/questions/17500704/how-can-i-set-focus-on-an-element-in-an-html-form-using-javascript
-
-https://jsoneditoronline.org/indepth/parse/json-date-format/
-
-//Bootstrap
-https://getbootstrap.com/docs/5.0/utilities/sizing/
-https://getbootstrap.com/docs/5.0/utilities/shadows/
-https://getbootstrap.com/docs/5.1/utilities/opacity/
-https://getbootstrap.com/docs/4.0/utilities/borders/
-https://getbootstrap.com/docs/4.0/utilities/flex/
+/**
+ * A collection of useful resources and references for developing a weather application.
+ * 
+ * Resources:
+ * - Fetch API: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+ * - Tomorrow.io Weather API: 
+ *   - https://www.tomorrow.io/a/faq/weather-api/how-can-i-access-weather-data-for-my-area-using-the-us-weather-api/
+ *   - https://docs.tomorrow.io/reference/post-timelines
+ *   - https://docs.tomorrow.io/reference/weather-forecast?_gl=1*tvzhgu*_gcl_au*NTEzNDMwNDkzLjE3Mzg0Mjc3NTc.
+ *   - https://docs.tomorrow.io/reference/realtime-weather?_gl=1*tvzhgu*_gcl_au*NTEzNDMwNDkzLjE3Mzg0Mjc3NTc.
+ * - Weather App Tutorial: https://medium.com/@francesco.saviano87/creating-a-stunning-weather-app-with-javascript-a-step-by-step-guide-4c0cac3fa780
+ * - Event Handling: 
+ *   - https://stackoverflow.com/questions/52882144/replacement-for-deprecated-keypress-dom-event
+ *   - https://www.w3.org/TR/uievents/#event-type-keypress
+ * - Async/Await: https://stackoverflow.com/questions/44512388/understanding-async-await-on-nodejs
+ * - Setting Focus: 
+ *   - https://stackoverflow.com/questions/59652055/set-focus-on-text-input-using-button-and-javascript
+ *   - https://stackoverflow.com/questions/17500704/how-can-i-set-focus-on-an-element-in-an-html-form-using-javascript
+ * - Geolocation: https://stackoverflow.com/questions/6033561/geolocation-zip-code
+ * - JSON Date Format: https://jsoneditoronline.org/indepth/parse/json-date-format/
+ * - Unix Timestamp Conversion: https://stackoverflow.com/questions/847185/convert-a-unix-timestamp-to-time-in-javascript
+ * 
+ * Bootstrap Utilities:
+ * - Sizing:  https://getbootstrap.com/docs/5.0/utilities/sizing/
+ * - Shadows: https://getbootstrap.com/docs/5.0/utilities/shadows/
+ * - Opacity: https://getbootstrap.com/docs/5.1/utilities/opacity/
+ * - Borders: https://getbootstrap.com/docs/4.0/utilities/borders/
+ * - Flexbox: https://getbootstrap.com/docs/4.0/utilities/flex/
+ * - Icons:   https://icons.getbootstrap.com/
+ */

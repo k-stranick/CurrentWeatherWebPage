@@ -1,5 +1,5 @@
+/************************* Search Bar *************************/
 .card {
-  background-color: #f0ebeb;
   border-radius: 5px;
   box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.4);
   margin: 10px;
@@ -15,13 +15,28 @@ button:hover {
   background-color: #f19f07 !important;
 }
 
-/* 
-body {
-  font-family: "Roboto", sans-serif;
-  margin: 0;
-  padding: 0;
-} */
+/* Semi-transparent bar that spans the full width */
+.translucent-bar {
+  background-color: rgba(0, 0, 0, 0.5); /* 50% black overlay */
+  border-radius: 0.5rem;
+}
 
+.custom-box-shadow {
+  /* Increase the opacity or adjust the spread to your liking */
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.7) !important;
+}
+
+input.form-control:focus {
+  border-color: #eb9b50 !important;
+  outline: none !important;
+  box-shadow: 0 0 0 0.25rem rgba(235, 155, 80, 0.5) !important;
+}
+
+#searchContainer {
+  background-color: hsla(0, 14%, 93%, 0.808) !important;
+}
+
+/************************* Background Image *************************/
 .background-img {
   /* Multiple backgrounds: gradient + image */
   background: linear-gradient(rgba(255, 254, 254, 0.5), rgba(6, 149, 231, 0.4)),
@@ -34,28 +49,68 @@ body {
   min-height: 100vh;
 }
 
-/* Semi-transparent bar that spans the full width */
-.translucent-bar {
-  background-color: rgba(0, 0, 0, 0.5); /* 50% black overlay */
-  border-radius: 0.5rem;
+/************************* Weather Data Display *************************/
+.weather-card {
+  max-width: 500px;
+  margin: auto;
+  border-radius: 10px;
+  padding: 25px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
-.custom-box-shadow {
-  /* Increase the opacity or adjust the spread to your liking */
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.7) !important;
+.weather-title {
+  font-weight: bold;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.location {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.time {
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.stat-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.stat-box i {
+  font-size: 2rem;
+  margin-bottom: 5px;
+}
+
+.stat-box p {
+  font-size: 1.3rem;
+  margin: 0;
+  font-weight: bold;
+}
+
+.stat-box span {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/************************* Animation *************************/
+.fade-in {
+  opacity: 0; /* Ensure the element is initially hidden */
+  animation: fadeIn 1.5s forwards; /* Apply the fadeIn animation */
 }
 
 @keyframes fadeIn {
   to {
     opacity: 1;
   }
-}
-
-#searchContainer {
-  background-color: hsla(0, 14%, 93%, 0.808) !important;
-}
-
-.fade-in {
-  opacity: 0; /* Ensure the element is initially hidden */
-  animation: fadeIn 1.5s forwards; /* Apply the fadeIn animation */
 }
